@@ -1,2 +1,2 @@
-# first-try-matters
+# First Try Matters: Revisiting the Role of Reflection in Reasoning Models
 Implementation for the paper "First Try Matters: Revisiting the Role of Reflection in Reasoning Models"
