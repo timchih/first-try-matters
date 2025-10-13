@@ -13,6 +13,10 @@ Then run the following command.
 bash start_sglang_and_run_gpt.sh --run-id YOUR_RUN_IDENTIFIER --sp-id 3  # choose from 1, 2, 3 for system prompts, see system_prompts.py for details. In the paper we use 3.
 ```
 
+## Datasets
+
+Datasets curated in Section 3.1 of the paper can be downloaded from 🤗 Hugging Face: https://huggingface.co/datasets/olafyiii/first-try-matters.
+
 ## Citation
 If you find this work useful, please consider citing:
 ```bibtex
