@@ -12,3 +12,14 @@ Then run the following command.
 ```bash
 bash start_sglang_and_run_gpt.sh --run-id YOUR_RUN_IDENTIFIER --sp-id 3  # choose from 1, 2, 3 for system prompts, see system_prompts.py for details. In the paper we use 3.
 ```
+
+## Citation
+If you find this work useful, please consider citing:
+```bibtex
+@article{kang2025first,
+  title={First Try Matters: Revisiting the Role of Reflection in Reasoning Models},
+  author={Kang, Liwei and Deng, Yue and Xiao, Yao and Mo, Zhanfeng and Lee, Wee Sun and Bing, Lidong},
+  journal={arXiv preprint arXiv:2510.08308},
+  year={2025}
+}
+```
