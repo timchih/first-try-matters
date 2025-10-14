@@ -23,8 +23,7 @@ from system_prompts import SYSTEM_PROMPT_1, SYSTEM_PROMPT_2, SYSTEM_PROMPT_3
 from tqdm import tqdm
 from transformers import AutoTokenizer
 
-from verl.utils.reward_score.miromind import compute_score
-from verl.utils.torch_functional import get_response_mask
+from utils import compute_score, get_response_mask
 
 # ---- Argument parsing (now also accepts run-id and system-prompt-id) ----
 parser = argparse.ArgumentParser(description="Run rollout post-processing")
