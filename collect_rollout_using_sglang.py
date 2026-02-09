@@ -12,7 +12,11 @@ from openai import OpenAI
 import pandas as df_pd
 from verl import DataProto  # noqa: F401
 import transformers
-from verl.utils.reward_score.miromind import compute_score
+try:
+    from verl.utils.reward_score.miromind import compute_score
+except Exception as e:
+    compute_score = None
+    _MIROMIND_IMPORT_ERROR = e
 from tqdm import tqdm
 import pickle
 
@@ -170,6 +174,7 @@ def main():
         return submitted
 
     processed_here = 0
+    missing_reward_warned = False
     target_total = len(indices)
 
     if target_total == 0:
@@ -199,12 +204,22 @@ def main():
                         attention_mask = torch.ones_like(input_ids)
 
                         # Reward
-                        try:
-                            gt = reward_models[i]["ground_truth"]
-                            score = compute_score(text, gt)["score"]
-                        except Exception as e:
-                            print(f"[WARN] reward failed; idx={i} err={e}")
+                        if compute_score is None:
+                            if not missing_reward_warned:
+                                print(
+                                    "[WARN] reward scoring unavailable; missing "
+                                    f"verl.utils.reward_score.miromind ({_MIROMIND_IMPORT_ERROR}). "
+                                    "Falling back to NaN rewards."
+                                )
+                                missing_reward_warned = True
                             score = float("nan")
+                        else:
+                            try:
+                                gt = reward_models[i]["ground_truth"]
+                                score = compute_score(text, gt)["score"]
+                            except Exception as e:
+                                print(f"[WARN] reward failed; idx={i} err={e}")
+                                score = float("nan")
 
                         # Pack and atomically save a per-index pickle
                         batch_dict = {

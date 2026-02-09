@@ -1,0 +1,13 @@
+bash generate_rollouts.sh -m models/Qwen3-1.7B -o rollouts/qwen1_7b_output
+
+PIP_CACHE_DIR=/vol/bitbucket/tq422/tmp/pip-cache pip install --no-cache-dir -r requirements.txt
+
+
+FLASHINFER_WORKSPACE_DIR=/vol/bitbucket/tq422/.cache/flashinfer \
+XDG_CACHE_HOME=/vol/bitbucket/tq422/.cache \
+CUDA_VISIBLE_DEVICES=0 MLP_WORKER_GPU=1 TP_SIZE=1 DP_SIZE=1 \
+bash generate_rollouts.sh -m models/Qwen3-1.7B -o rollouts/qwen1_7b_output
+
+source /vol/bitbucket/tq422/dlenv/bin/activate
+
+. /vol/cuda/12.5.0/setup.sh
